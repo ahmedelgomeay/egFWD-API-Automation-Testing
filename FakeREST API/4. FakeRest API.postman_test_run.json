@@ -1,0 +1,409 @@
+{
+	"id": "55b40aa1-2f87-435b-9e2a-4aa875a29861",
+	"name": "FakeRest API",
+	"timestamp": "2022-07-30T00:22:20.339Z",
+	"collection_id": "21556207-78752a4b-bc39-4677-8133-3a11aac1e589",
+	"folder_id": 0,
+	"environment_id": "21556207-3caf4f26-49b5-410b-ab77-dc9bb5fc9924",
+	"totalPass": 17,
+	"totalFail": 7,
+	"results": [
+		{
+			"id": "d5ce659e-c695-441b-b71b-a3d5063ed141",
+			"name": "GET - Authors List",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 528,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (2) | Verify Response has a JSON body": true,
+				"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": true,
+				"Test Case (4) | Verify Response body | ID, idBook values are numbers": true,
+				"Test Case (5) | Verify Response body | firstName & lastName values are string": true,
+				"Test Case (6) | Verify Response body | Each id is unique": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify Response has a JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (4) | Verify Response body | ID, idBook values are numbers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (5) | Verify Response body | firstName & lastName values are string": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (6) | Verify Response body | Each id is unique": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				528
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (2) | Verify Response has a JSON body": true,
+					"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": true,
+					"Test Case (4) | Verify Response body | ID, idBook values are numbers": true,
+					"Test Case (5) | Verify Response body | firstName & lastName values are string": true,
+					"Test Case (6) | Verify Response body | Each id is unique": true
+				}
+			]
+		},
+		{
+			"id": "d7e10ef0-76df-46ac-832e-edff5c1d7366",
+			"name": "POST - Add new Author",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 80,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 201 Created": false,
+				"Test Case (2) | Verify Response has a JSON body": true,
+				"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 201 Created": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test Case (2) | Verify Response has a JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				80
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 201 Created": false,
+					"Test Case (2) | Verify Response has a JSON body": true,
+					"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": true
+				}
+			]
+		},
+		{
+			"id": "53cd336b-7c04-44a8-9054-9f7a3d347423",
+			"name": "POST - Add new Author without firstName",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 400": false
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 400": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				82
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 400": false
+				}
+			]
+		},
+		{
+			"id": "f90f1ba9-ea5f-4c47-a4b2-f41c3204ce15",
+			"name": "POST - Add new Author without lastName",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors",
+			"time": 83,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 400": false
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 400": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				83
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 400": false
+				}
+			]
+		},
+		{
+			"id": "483944ff-f799-408f-8512-a3c9694e5aa6",
+			"name": "GET- Single idBook",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/authors/books/900",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (2) | Verify Response has a JSON body": true,
+				"Test Case (3) | Searching with valid idBook should return relative data in response body": false
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify Response has a JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Searching with valid idBook should return relative data in response body": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				82
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (2) | Verify Response has a JSON body": true,
+					"Test Case (3) | Searching with valid idBook should return relative data in response body": false
+				}
+			]
+		},
+		{
+			"id": "dec51299-c938-4968-a304-09927be9f598",
+			"name": "GET - Single ID",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/900",
+			"time": 81,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": false,
+				"Test Case (2) | Verify Response has a JSON body": true,
+				"Test Case (3) | Searching with valid idBook should return relative data in response body": false
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Test Case (2) | Verify Response has a JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Searching with valid idBook should return relative data in response body": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				81
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": false,
+					"Test Case (2) | Verify Response has a JSON body": true,
+					"Test Case (3) | Searching with valid idBook should return relative data in response body": false
+				}
+			]
+		},
+		{
+			"id": "3cb3b34b-1645-4f9d-9a04-57be9d07472c",
+			"name": "PUT - Edit Author firstName & lastName",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/900",
+			"time": 82,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (2) | Verify Response has a JSON body": true,
+				"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": true,
+				"Test Case (4) | Verify first name & last name have changed": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify Response has a JSON body": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (4) | Verify first name & last name have changed": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				82
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (2) | Verify Response has a JSON body": true,
+					"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName": true,
+					"Test Case (4) | Verify first name & last name have changed": true
+				}
+			]
+		},
+		{
+			"id": "50555b3f-11a3-4474-9cd2-a95f70232e33",
+			"name": "GET - Rechecking Author First Name & Last Name Changed",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/900",
+			"time": 81,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Test Case (5) | Verify first name & last name have changed": false
+			},
+			"testPassFailCounts": {
+				"Test Case (5) | Verify first name & last name have changed": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				81
+			],
+			"allTests": [
+				{
+					"Test Case (5) | Verify first name & last name have changed": false
+				}
+			]
+		},
+		{
+			"id": "5bc9d1d3-3036-4751-84ce-9522c7ee8878",
+			"name": "DELETE - Author",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/900",
+			"time": 81,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				81
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1f7fe8c7-0374-4a44-9686-d85b2c0ee5ac",
+			"name": "GET - Rechecking Author Deleted",
+			"url": "http://fakerestapi.azurewebsites.net/api/v1/Authors/900",
+			"time": 89,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 404 Not Found": true,
+				"Test Case (2) | Author should be removed after Delete Request": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 404 Not Found": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Author should be removed after Delete Request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				89
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 404 Not Found": true,
+					"Test Case (2) | Author should be removed after Delete Request": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1269,
+	"collection": {
+		"requests": [
+			{
+				"id": "d5ce659e-c695-441b-b71b-a3d5063ed141",
+				"method": "GET"
+			},
+			{
+				"id": "d7e10ef0-76df-46ac-832e-edff5c1d7366",
+				"method": "POST"
+			},
+			{
+				"id": "53cd336b-7c04-44a8-9054-9f7a3d347423",
+				"method": "POST"
+			},
+			{
+				"id": "f90f1ba9-ea5f-4c47-a4b2-f41c3204ce15",
+				"method": "POST"
+			},
+			{
+				"id": "483944ff-f799-408f-8512-a3c9694e5aa6",
+				"method": "GET"
+			},
+			{
+				"id": "dec51299-c938-4968-a304-09927be9f598",
+				"method": "GET"
+			},
+			{
+				"id": "3cb3b34b-1645-4f9d-9a04-57be9d07472c",
+				"method": "PUT"
+			},
+			{
+				"id": "50555b3f-11a3-4474-9cd2-a95f70232e33",
+				"method": "GET"
+			},
+			{
+				"id": "5bc9d1d3-3036-4751-84ce-9522c7ee8878",
+				"method": "DELETE"
+			},
+			{
+				"id": "1f7fe8c7-0374-4a44-9686-d85b2c0ee5ac",
+				"method": "GET"
+			}
+		]
+	}
+}

@@ -1,0 +1,211 @@
+- API: GET /api/v1/Authors
+ 
+Test Case (1) | Verify Status code is 200 OK
+Expected Result: 200 OK
+Actual Result: 200 OK
+Status: Pass
+
+Test Case (2) | Verify Response has a JSON body
+Expected Result: Response has JSON body
+Actual Result: Response has JSON body
+Status: Pass
+
+Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName
+Expected Result: Response body contains ID, IDBook, FirstName & LastName
+Actual Result: Response body contains ID, IDBook, FirstName & LastName
+Status: Pass
+
+Test Case (4) | Verify Response body | ID, idBook values are numbers
+Expected Result: ID, idBook values are numbers
+Actual Result: ID, idBook values are numbers
+Status: Pass
+
+Test Case (5) | Verify Response body | firstName & lastName values are string
+Expected Result: firstName & lastName values are string
+Actual Result: firstName & lastName values are string
+Status: Pass
+
+Test Case (6) | Verify Response body | Each id is unique
+Expected Result: Each id is unique
+Actual Result: Each id is unique
+Status: Pass
+
+
+
+
+- API: POST /api/v1/Authors
+
+Test Case (1) | Verify Status code is 201 Created
+Expected Result: 201 Created
+Actual Result: 200 OK
+Status: Fail
+
+Test Case (2) | Verify Response has a JSON body
+Expected Result: Response has JSON body
+Actual Result: Response has JSON body
+Status: Pass
+
+Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName
+Expected Result: Response body contains ID, IDBook, FirstName & LastName
+Actual Result: Response body contains ID, IDBook, FirstName & LastName
+Status: Pass
+
+Test Case (4) | firstName should be mandatory 
+Expected Result: Status code is 400
+Actual Result: Status code is 200 OK
+Status: Fail
+
+Test Case (5) | lastName should be mandatory 
+Expected Result: Status code is 400
+Actual Result: Status code is 200 OK
+Status: Fail
+
+
+
+- API: GET /api/v1/Authors/authors/books/{idBook}
+
+Test Case (1) | Verify Status code is 200 OK
+Expected Result: 200 OK
+Actual Result: 200 OK
+Status: Pass
+
+Test Case (2) | Verify Response has a JSON body
+Expected Result: Response has JSON body
+Actual Result: Response has JSON body
+Status: Pass
+
+Test Case (3) | Searching with valid idBook should return relative data in response body
+Expected Result: Response body should contain id, idBook, firstName, lastName & idBook is correct
+Actual Result: Response body is empty
+Status: Fail
+
+
+
+- API: GET /api/v1/Authors/{id}
+
+ Comment: This API functionality is not working correctly.
+
+Test Case (1) | Verify Status code is 200 OK
+Expected Result: 200 OK
+Actual Result: 404 Not Found
+Status: Fail
+
+Test Case (2) | Verify Response has a JSON body
+Expected Result: Response has JSON body
+Actual Result: Response has JSON body
+Status: Pass
+
+Test Case (3) | Searching with valid id should return relative data in response body
+Expected Result: Response body should contain id, idBook, firstName, lastName & id is correct
+Actual Result: 
+1) Response did not locate the user id
+2) Error response body appeared
+{
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+    "title": "Not Found",
+    "status": 404,
+    "traceId": "00-e755c1160f977c4eaf6fc92210269a76-cf7956b9f622d947-00"
+}
+Status: Fail
+
+
+
+
+- API: PUT /api/v1/Authors/{id}
+
+Test Case (1) | Verify Status code is 200 OK
+Expected Result: 200 OK
+Actual Result: 404 Not Found
+Status: Fail
+
+Test Case (2) | Verify Response has a JSON body
+Expected Result: Response has JSON body
+Actual Result: Response has JSON body
+Status: Pass
+
+Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName
+Expected Result: Response body contains ID, IDBook, FirstName & LastName
+Actual Result: Response body contains ID, IDBook, FirstName & LastName
+Status: Pass
+
+Test Case (4) | Verify first name & last name have changed
+Expected Result: Response body contains changed firstName & lastName
+Actual Result: Response body contains changed firstName & lastName
+Status: Pass
+
+
+
+
+- API: GET /api/v1/Authors/{id}
+
+Comment: This API functionality is not working correctly.
+
+Test Case (4) | Verify first name & last name have changed after PUT request
+Expected Result: Response body contains changed firstName & lastName
+Actual Result: 
+1) Response did not locate the user id
+2) Error response body appeared
+{
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+    "title": "Not Found",
+    "status": 404,
+    "traceId": "00-b01f6bc3a1427e41b6547bf959cef01b-76d4ac68ed006046-00"
+}
+Status: Fail
+
+
+
+
+- API: DELETE /api/v1/Authors/{id}
+
+Comment: Automation Testing for this API is not possible as it has no body.
+
+Test Case (1) | Verify Response has a JSON body
+Expected Result: Response has JSON body
+Actual Result: Response has empty body
+Status: Fail
+
+Test Case (2) | Verify Status code is 200 OK
+Expected Result: 200 OK
+Actual Result: 200 OK
+Status: Pass
+
+
+
+
+- API: GET /api/v1/Authors/{id}
+
+Comment: This API functionality is not working correctly.
+
+Test Case (1) | Verify Status code is 404 Not Found
+Expected Result: 404 Not Found
+Actual Result: 404 Not Found
+Status: Inconclusive
+Comment: This API returns the Status Code (404 Not Found) and Error Body even if the Author ID exists.
+
+ Test Case (1) | Author should be removed after Delete Request
+ Expected Result: 
+ 1) Response Json Title to be Not Found
+ 2) Response Json status to be 404
+ Actual Result: As Expected
+ Status: Inconclusive
+ Comment: This API returns the Status Code (404 Not Found) and Error Body even if the Author ID exists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

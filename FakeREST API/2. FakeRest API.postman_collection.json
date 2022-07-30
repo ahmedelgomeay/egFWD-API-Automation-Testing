@@ -1,0 +1,632 @@
+{
+	"info": {
+		"_postman_id": "78752a4b-bc39-4677-8133-3a11aac1e589",
+		"name": "FakeRest API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21556207"
+	},
+	"item": [
+		{
+			"name": "GET - Authors List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response has a JSON body",
+							"pm.test(\"Test Case (2) | Verify Response has a JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName",
+							"pm.test(\"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName\", function (){",
+							"     pm.expect(responseJson[0]).to.have.all.keys(\"id\", \"idBook\", \"firstName\", \"lastName\");",
+							"});",
+							"",
+							"// Test Case (4) | Verify Response body | ID, idBook values are numbers",
+							"     pm.test(\"Test Case (4) | Verify Response body | ID, idBook values are numbers\", function () {",
+							"     pm.expect(responseJson[0].id).to.be.a('number');",
+							"     pm.expect(responseJson[0].idBook).to.be.a('number');",
+							"     });",
+							"",
+							"// Test Case (5) | Verify Response body | firstName & lastName values are string",
+							"    pm.test(\"Test Case (5) | Verify Response body | firstName & lastName values are string\", function (){",
+							"        pm.expect(responseJson[0].firstName).to.be.a('string');",
+							"        pm.expect(responseJson[0].lastName).to.be.a('string');",
+							"    });  ",
+							"",
+							"// Test Case (6) | Verify Response body | Each id is unique",
+							"pm.test(\"Test Case (6) | Verify Response body | Each id is unique\", function() {",
+							"  pm.expect(responseJson.reduce(function(arr, a) {",
+							"    if (!arr.includes(a.id)) {",
+							"      arr.push(a.id);",
+							"    }",
+							"    return arr;",
+							"  }, []).length).to.eql(responseJson.length);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/Authors",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Add new Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 201 Created",
+							"pm.test(\"Test Case (1) | Verify Status code is 201 Created\", function () {",
+							"    pm.expect(responseCode).to.eql(201);",
+							"    pm.expect(responseStatus).to.eql(\"Created\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response has a JSON body",
+							"pm.test(\"Test Case (2) | Verify Response has a JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName",
+							"pm.test(\"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName\", function (){",
+							"     pm.expect(responseJson).to.have.all.keys(\"id\", \"idBook\", \"firstName\", \"lastName\");",
+							"});",
+							"",
+							"//--------------------------------------------------------------------------------------------",
+							"// Setting id , idBook, firstName, lastName as Environment Variables to be used in next APIs requests",
+							"    pm.environment.set(\"id\", responseJson.id);",
+							"    pm.environment.set(\"idBook\", responseJson.idBook);",
+							"    pm.environment.set(\"firstName\", responseJson.firstName);",
+							"    pm.environment.set(\"lastName\", responseJson.lastName);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 900,\n  \"idBook\": 900,\n   \"firstName\": \"Mahmoud\",\n  \"lastName\": \"Test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Add new Author without firstName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (4) | firstName should be mandatory ",
+							"pm.test(\"Test Case (1) | Verify Status code is 400\", function () {",
+							"    pm.expect(responseCode).to.eql(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 900,\n  \"idBook\": 900,\n  \"lastName\": \"Test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Add new Author without lastName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (5) | lastName should be mandatory",
+							"pm.test(\"Test Case (1) | Verify Status code is 400\", function () {",
+							"    pm.expect(responseCode).to.eql(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 900,\n  \"idBook\": 900,\n  \"firstName\": \"Mahmoud\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET- Single idBook",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"var environmentIdBook = pm.environment.get('idBook');",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response has a JSON body",
+							"pm.test(\"Test Case (2) | Verify Response has a JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test Case (3) | Searching with valid idBook should return relative data in response body.",
+							"pm.test(\"Test Case (3) | Searching with valid idBook should return relative data in response body\", function () {",
+							"     pm.expect(responseJson).to.have.all.keys(\"id\", \"idBook\", \"firstName\", \"lastName\");",
+							"     pm.expect(responseJson.idBook).to.eql(environmentIdBook);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/Authors/authors/books/{{idBook}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors",
+						"authors",
+						"books",
+						"{{idBook}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Single ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"var environmentId = pm.environment.get('id');",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response has a JSON body",
+							"pm.test(\"Test Case (2) | Verify Response has a JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test Case (3) | Searching with valid id should return relative data in response body",
+							"pm.test(\"Test Case (3) | Searching with valid idBook should return relative data in response body\", function (){",
+							"     pm.expect(responseJson).to.have.all.keys(\"id\", \"idBook\", \"firstName\", \"lastName\");",
+							"     pm.expect(responseJson.id).to.eql(environmentId);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/Authors/{{id}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Edit Author firstName & lastName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"var getfirstname = pm.environment.get(\"firstName\");",
+							"var getlastname = pm.environment.get(\"lastname\");",
+							"",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response has a JSON body",
+							"pm.test(\"Test Case (2) | Verify Response has a JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName",
+							"pm.test(\"Test Case (3) | Verify Response body contains ID, IDBook, FirstName & LastName\", function (){",
+							"     pm.expect(responseJson).to.have.all.keys(\"id\", \"idBook\", \"firstName\", \"lastName\");",
+							"});",
+							"",
+							"// Test Case (4) | Verify first name & last name have changed",
+							"pm.test(\"Test Case (4) | Verify first name & last name have changed\", function() {",
+							"    pm.expect(responseJson.firstName).to.eql(getfirstname);",
+							"    pm.expect(responseJson.lastName).to.eql(getlastname);",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Setting firstname & lastname variables in environment",
+							"pm.environment.set(\"firstName\", \"Ahmed\");",
+							"pm.environment.set(\"lastName\", \"Test\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": {{id}},\n  \"idBook\": {{idBook}},\n  \"firstName\": \"{{firstName}}\",\n  \"lastName\": \"{{lastName}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors/{{id}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Rechecking Author First Name & Last Name Changed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"var getfirstname = pm.environment.get(\"firstName\");",
+							"var getlastname = pm.environment.get(\"lastname\");",
+							"",
+							"",
+							"// Test Case (5) | Verify first name & last name have changed",
+							"pm.test(\"Test Case (5) | Verify first name & last name have changed\", function() {",
+							"    pm.expect(responseJson.firstName).to.eql(getfirstname);",
+							"    pm.expect(responseJson.lastName).to.eql(getlastname);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors/{{id}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Could Not Test Request as it has no body, Returns Error!!",
+							"// Should proceed manually testing this one.",
+							"",
+							"/* Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response has a JSON body",
+							"pm.test(\"Test Case (2) | Verify Response has a JSON body\", function () {",
+							"    pm.response.to.be.json;",
+							"}); */"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "server",
+						"value": "Kestrel",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Length",
+						"value": "0",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors/{{id}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Rechecking Author Deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 404 Not Found",
+							"pm.test(\"Test Case (1) | Verify Status code is 404 Not Found\", function () {",
+							"    pm.expect(responseCode).to.eql(404);",
+							"    pm.expect(responseStatus).to.eql(\"Not Found\");",
+							"});",
+							"",
+							"// Test Case (2) | Author should be removed after Delete Request",
+							"pm.test(\"Test Case (2) | Author should be removed after Delete Request\", function (){",
+							"     pm.expect(responseJson.title).to.eql(\"Not Found\");",
+							"     pm.expect(responseJson.status).to.eql(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}/Authors/{{id}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"Authors",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

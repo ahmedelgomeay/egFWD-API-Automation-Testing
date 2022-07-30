@@ -1,0 +1,510 @@
+{
+	"info": {
+		"_postman_id": "bbd37ce6-7ea5-4fc0-b728-d347a5c09ed8",
+		"name": "Trello APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21556207"
+	},
+	"item": [
+		{
+			"name": "Create Trello Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"",
+							"// Test Case (1) | Verify default value of prefs | permissionLevel is private",
+							"pm.test(\"Test Case (1) | Verify default value of prefs | permissionLevel is private\", function () {",
+							"    pm.expect(responseJson.prefs.permissionLevel).to.be.a('String')",
+							"    pm.expect(responseJson.prefs.permissionLevel).to.eql(\"private\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify default value of prefs | canBePublic is true",
+							"pm.test(\"Test Case (2) | Verify default value of prefs| canBePublic is true\", function () {",
+							"    pm.expect(responseJson.prefs.canBePublic).to.be.a('Boolean');",
+							"    pm.expect(responseJson.prefs.canBePublic).to.eql(true);",
+							"});",
+							"",
+							"// Test Case (3) | Verify default value of canInvite is true",
+							"pm.test(\"Test Case (3) | Verify default value of canInvite is true\", function () {",
+							"    pm.expect(responseJson.prefs.canInvite).to.be.a('Boolean');",
+							"    pm.expect(responseJson.prefs.canInvite).to.eql(true);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/boards/?name=egFWD | Trello API Automation Testing&key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "egFWD | Trello API Automation Testing"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Trello Boards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var boardsArray = responseJson.boards",
+							"var FirstBoardID = boardsArray[0].id",
+							"var LastBoardID = boardsArray.at(-1).id",
+							"",
+							"// Test Case (1) | Verify response body | Number of boards is more than one",
+							"pm.test(\"Test Case (1) | Verify response body | Number of boards is more than one\", function () {",
+							"    pm.expect(responseJson.boards).to.be.an('array');",
+							"    pm.expect(boardsArray.length).to.be.greaterThan(1);",
+							"});",
+							"",
+							"// Setting FirstBoardID & LastBoardID as Environment Variables",
+							"pm.environment.set(\"FirstBoardID\", FirstBoardID);",
+							"pm.environment.set(\"LastBoardID\", LastBoardID)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/members/me?boards=open&key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "boards",
+							"value": "open"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response body has a confirmation message",
+							"pm.test(\"Test Case (2) | Verify Response body has a confirmation message\", function () {",
+							"    pm.expect(responseJson).to.have.key(\"board is removed successfully\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/boards/:id?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						":id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{LastBoardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a List",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Setting ListName environment variable to:",
+							"pm.environment.set(\"ListName\", \"First List\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response body contains id, name, idBoard",
+							"pm.test(\"Test Case (3) | Verify Response body contains id, name, idBoard\", function (){",
+							"     pm.expect(responseJson).to.include.all.keys(\"id\", \"name\", \"idBoard\");",
+							"});",
+							"",
+							"// Test Case (3) | Verify Response body most important parameters default values",
+							"pm.test(\"Test Case (3) | Verify Response body most important parameters\", function (){",
+							"     pm.expect(responseJson.closed).to.be.a('Boolean');",
+							"     pm.expect(responseJson.closed).to.eql(false);",
+							"     pm.expect(responseJson.limits).to.be.empty;",
+							"});",
+							"",
+							"// Setting List ID to environment variables",
+							"pm.environment.set(\"ListID\", responseJson.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}/1/lists?name={{ListName}}&idBoard={{FirstBoardID}}&key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{ListName}}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{FirstBoardID}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lists on a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response body default number of lists",
+							"pm.test(\"Test Case (2) | Verify Response body default number of lists\", function () {",
+							"    pm.expect(responseJson.length).to.eql(3);",
+							"});",
+							"",
+							"// Setting FirstListID & LastListID as environment variables",
+							"pm.environment.set(\"FirstListID\", responseJson[0].id)",
+							"pm.environment.set(\"LastListID\", responseJson.at(-1).id)",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}/1/boards/:id/lists?key={{key}}&token={{token}}",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						":id",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{FirstBoardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Archive or unarchive a list | Value=true",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"var responseHeaders = pm.response.headers;",
+							"",
+							"// Test Case (1) | Verify Status code is 200 OK",
+							"pm.test(\"Test Case (1) | Verify Status code is 200 OK\", function () {",
+							"    pm.expect(responseCode).to.eql(200);",
+							"    pm.expect(responseStatus).to.eql(\"OK\");",
+							"});",
+							"",
+							"// Test Case (2) | Verify Response body closed is true when Query parameter value is true",
+							"pm.test(\"Test Case (2) | Verify Response body closed is true when Query parameter value is true\", function (){",
+							"     pm.expect(responseJson.closed).to.be.a('Boolean');",
+							"     pm.expect(responseJson.closed).to.eql(true);",
+							"});",
+							"",
+							"// Test Case (3) | Verify Response header has a valid Set-Cookie",
+							"pm.test(\"Test Case (3) | Verify Response header has a valid Set-Cookie\", function (){",
+							"     pm.response.to.have.header(\"Set-Cookie\")",
+							"     pm.expect(responseHeaders.get(\"Set-Cookie\")).to.contain(\"isEnterpriseAdmin%3Dfalse\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}/1/lists/:id/closed?key={{key}}&token={{token}}&value=true",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						":id",
+						"closed"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "value",
+							"value": "true"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{FirstListID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Archive or unarchive a list | Value=false",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Global Variables",
+							"var responseJson = pm.response.json();",
+							"var responseCode = pm.response.code;",
+							"var responseStatus = pm.response.status;",
+							"var responseHeaders = pm.response.headers;",
+							"",
+							"",
+							"// Test Case (4) | Verify Response body closed is false when Query parameter value is false",
+							"pm.test(\"Test Case (3) | Verify Response body closed is false when Query parameter value is false\", function (){",
+							"     pm.expect(responseJson.closed).to.be.a('Boolean');",
+							"     pm.expect(responseJson.closed).to.eql(false);",
+							"});",
+							"",
+							"// Test Case (5) | Verify Response header has a valid Set-Cookie",
+							"pm.test(\"Test Case (5) | Verify Response header has a valid Set-Cookie\", function (){",
+							"     pm.response.to.have.header(\"Set-Cookie\")",
+							"     pm.expect(responseHeaders.get(\"Set-Cookie\")).to.contain(\"isEnterpriseAdmin%3Dfalse\")",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}/1/lists/:id/closed?key={{key}}&token={{token}}&value=false",
+					"host": [
+						"{{BaseURL}}"
+					],
+					"path": [
+						"1",
+						"lists",
+						":id",
+						"closed"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "value",
+							"value": "false"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{FirstListID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

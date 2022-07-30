@@ -1,0 +1,289 @@
+{
+	"id": "6e432a25-723d-4c08-b566-862cee599817",
+	"name": "Trello APIs",
+	"timestamp": "2022-07-30T07:37:46.578Z",
+	"collection_id": "21556207-bbd37ce6-7ea5-4fc0-b728-d347a5c09ed8",
+	"folder_id": 0,
+	"environment_id": "21556207-2e13f906-60e5-4d10-b499-a89f36685960",
+	"totalPass": 14,
+	"totalFail": 2,
+	"results": [
+		{
+			"id": "d9b1365f-616c-446f-82c3-da768eacd377",
+			"name": "Create Trello Board",
+			"url": "https://api.trello.com/1/boards/?name=egFWD%20|%20Trello%20API%20Automation%20Testing&key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138",
+			"time": 386,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify default value of prefs | permissionLevel is private": true,
+				"Test Case (2) | Verify default value of prefs| canBePublic is true": true,
+				"Test Case (3) | Verify default value of canInvite is true": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify default value of prefs | permissionLevel is private": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify default value of prefs| canBePublic is true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify default value of canInvite is true": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				386
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify default value of prefs | permissionLevel is private": true,
+					"Test Case (2) | Verify default value of prefs| canBePublic is true": true,
+					"Test Case (3) | Verify default value of canInvite is true": true
+				}
+			]
+		},
+		{
+			"id": "02e629f3-7f3d-47de-92b8-461b07384ae1",
+			"name": "Get All Trello Boards",
+			"url": "https://api.trello.com/1/members/me?boards=open&key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138",
+			"time": 215,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify response body | Number of boards is more than one": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify response body | Number of boards is more than one": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				215
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify response body | Number of boards is more than one": true
+				}
+			]
+		},
+		{
+			"id": "52a3e89f-f69e-4b2e-8903-59aef567139b",
+			"name": "Delete a Board",
+			"url": "https://api.trello.com/1/boards/62e4dfc22ce5bb338e44d35f?key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138",
+			"time": 447,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (2) | Verify Response body has a confirmation message": false
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify Response body has a confirmation message": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				447
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (2) | Verify Response body has a confirmation message": false
+				}
+			]
+		},
+		{
+			"id": "a1905695-0a0e-4733-9ad6-13a1fd2fae09",
+			"name": "Create a List",
+			"url": "https://api.trello.com/1/lists?name=First%20List&idBoard=62e47aa2963bc81d87cd94d7&key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138",
+			"time": 271,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (3) | Verify Response body contains id, name, idBoard": true,
+				"Test Case (3) | Verify Response body most important parameters": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify Response body contains id, name, idBoard": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify Response body most important parameters": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				271
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (3) | Verify Response body contains id, name, idBoard": true,
+					"Test Case (3) | Verify Response body most important parameters": true
+				}
+			]
+		},
+		{
+			"id": "087f5552-9d27-4725-a9d0-54d4101719b9",
+			"name": "Get Lists on a Board",
+			"url": "https://api.trello.com/1/boards/62e47aa2963bc81d87cd94d7/lists?key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138",
+			"time": 203,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (2) | Verify Response body default number of lists": false
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify Response body default number of lists": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				203
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (2) | Verify Response body default number of lists": false
+				}
+			]
+		},
+		{
+			"id": "9745f558-589f-4eb0-b362-4cf218a0ffae",
+			"name": "Archive or unarchive a list | Value=true",
+			"url": "https://api.trello.com/1/lists/62e4dfc69e56cb3d82b35a91/closed?key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138&value=true",
+			"time": 236,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (1) | Verify Status code is 200 OK": true,
+				"Test Case (2) | Verify Response body closed is true when Query parameter value is true": true,
+				"Test Case (3) | Verify Response header has a valid Set-Cookie": true
+			},
+			"testPassFailCounts": {
+				"Test Case (1) | Verify Status code is 200 OK": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (2) | Verify Response body closed is true when Query parameter value is true": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (3) | Verify Response header has a valid Set-Cookie": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				236
+			],
+			"allTests": [
+				{
+					"Test Case (1) | Verify Status code is 200 OK": true,
+					"Test Case (2) | Verify Response body closed is true when Query parameter value is true": true,
+					"Test Case (3) | Verify Response header has a valid Set-Cookie": true
+				}
+			]
+		},
+		{
+			"id": "c73c3e34-b360-4b38-920f-5fb88c397366",
+			"name": "Archive or unarchive a list | Value=false",
+			"url": "https://api.trello.com/1/lists/62e4dfc69e56cb3d82b35a91/closed?key=84a14b48e49dbbbf2281880542fef343&token=5d8200428247583cac7d3c4aa9d335070652a10a592e3deb87d5f7adfd0e9138&value=false",
+			"time": 252,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Test Case (3) | Verify Response body closed is false when Query parameter value is false": true,
+				"Test Case (5) | Verify Response header has a valid Set-Cookie": true
+			},
+			"testPassFailCounts": {
+				"Test Case (3) | Verify Response body closed is false when Query parameter value is false": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case (5) | Verify Response header has a valid Set-Cookie": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				252
+			],
+			"allTests": [
+				{
+					"Test Case (3) | Verify Response body closed is false when Query parameter value is false": true,
+					"Test Case (5) | Verify Response header has a valid Set-Cookie": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2010,
+	"collection": {
+		"requests": [
+			{
+				"id": "d9b1365f-616c-446f-82c3-da768eacd377",
+				"method": "POST"
+			},
+			{
+				"id": "02e629f3-7f3d-47de-92b8-461b07384ae1",
+				"method": "GET"
+			},
+			{
+				"id": "52a3e89f-f69e-4b2e-8903-59aef567139b",
+				"method": "DELETE"
+			},
+			{
+				"id": "a1905695-0a0e-4733-9ad6-13a1fd2fae09",
+				"method": "POST"
+			},
+			{
+				"id": "087f5552-9d27-4725-a9d0-54d4101719b9",
+				"method": "GET"
+			},
+			{
+				"id": "9745f558-589f-4eb0-b362-4cf218a0ffae",
+				"method": "PUT"
+			},
+			{
+				"id": "c73c3e34-b360-4b38-920f-5fb88c397366",
+				"method": "PUT"
+			}
+		]
+	}
+}
